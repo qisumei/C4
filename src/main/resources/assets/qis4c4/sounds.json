@@ -1,0 +1,28 @@
+{
+    "tw": {
+      "sounds": [{
+        "name": "qis4c4:tw",
+        "volume": 1.0,
+        "pitch": 1.0
+      }],
+      "subtitle": "subtitles.qis4c4.tw"
+    },
+        "ctw": {
+          "sounds": [{
+            "name": "qis4c4:ctw",
+            "volume": 1.0,
+            "pitch": 1.0
+          }],
+          "subtitle": "subtitles.qis4c4.ctw"
+          },
+          
+            "c4_place": {
+              "sounds": [{
+                "name": "qis4c4:bp",
+                "volume": 1.0,
+                "pitch": 1.0
+              }],
+              "subtitle": "subtitles.qis4c4.c4_place"
+            }
+          
+}
