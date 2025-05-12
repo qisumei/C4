@@ -6,14 +6,16 @@ import com.mojang.logging.LogUtils;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
-import com.qisumei.c4.block.C4Block;  // ← 导入自定义方块类
+import com.qisumei.c4.block.C4Block;
 import com.qisumei.c4.item.C4Item;
 import com.qisumei.c4.sound.ModSounds;
 
@@ -46,5 +48,11 @@ public class qis4c4 {
         BLOCKS.register(modBus);
         ModSounds.register(modBus);
         LOGGER.info("Loaded mod {}", MODID);
+        modBus.addListener(this::onBuildCreativeModeTabContents);
     }
+
+        private void onBuildCreativeModeTabContents(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.COMBAT) {
+            event.accept(QISC4_ITEM.get());
+        }}
 }
