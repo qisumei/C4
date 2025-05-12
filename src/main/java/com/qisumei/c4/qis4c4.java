@@ -37,7 +37,6 @@ public class qis4c4 {
         .destroyTime(6.45f)
         .explosionResistance(10.0f)
         .sound(SoundType.GRASS)
-        .lightLevel(s -> 7)
         .noOcclusion()  // 允许部分透明，不遮挡视线
     )
     );
