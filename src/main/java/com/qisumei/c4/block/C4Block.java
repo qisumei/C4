@@ -41,16 +41,19 @@ public class C4Block extends Block {
         return C4_SHAPE;
         }
         @Override
-public void onPlace(BlockState state, Level world, BlockPos pos, BlockState oldState, boolean moved) {
-    super.onPlace(state, world, pos, oldState, moved);
-    if (!world.isClientSide) {
-        if (world instanceof ServerLevel serverLevel) {
-            C4CountdownHandler.startCountdown(pos, serverLevel, true);
-            world.scheduleTick(pos, this, DELAY_TICKS);
+        public void onPlace(BlockState state, Level world, BlockPos pos, BlockState oldState, boolean moved) {
+            super.onPlace(state, world, pos, oldState, moved);
+            if (!world.isClientSide) {
+                if (world instanceof ServerLevel serverLevel) {
+                    // 移除旧的倒计时
+                    C4CountdownHandler.onBlockDestroyed(pos, serverLevel, false);
+                    // 启动新的倒计时
+                    C4CountdownHandler.startCountdown(pos, serverLevel, true);
+                    world.scheduleTick(pos, this, DELAY_TICKS);
+                }
+                world.playSound(null, pos, ModSounds.C4_PLACE.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
+            }
         }
-        world.playSound(null, pos, ModSounds.C4_PLACE.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
-    }
-}
     @Override
     public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean moved) {
         if (!state.is(newState.getBlock())) {
